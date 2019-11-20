@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Captain America VS Dragon</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">SƏN</h1>
+            <div class="hero"></div>
+            <div class="healthbar">
+                <div :style="playerProgress" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+               <h2>  {{player_health }}% </h2>
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">Dragon</h1>
+            <div class="dragon"></div>
+            <div class="healthbar">
+                <div :style="monsterProgress" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                    <h2>  {{monster_health }}% </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if="!game_is_on">
+        <div class="small-12 columns">
+            <button id="start-game" @click="start_game">YENİ OYUN</button>
+        </div>
+    </section>
+    <section class="row controls" v-if="game_is_on">
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">HÜCUM</button>
+            <button id="special-attack" @click="special_attack">ÖZƏL HÜCUM</button>
+            <button id="heal" @click="health_up">İLK YARDIM</button>
+            <button id="give-up" @click="give_up">TƏSLİM OL!</button>
+        </div>
+    </section>
+    <section class="row log" v-if="logs.length>0">
+        <div class="small-12 columns">
+            <ul>
+                <li 
+                :class="{'player-turn':log.turn=='p','player-turn-health':log.turn=='h','monster-turn':log.turn=='m'}"
+                v-for="log in logs">{{log.text}} </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
